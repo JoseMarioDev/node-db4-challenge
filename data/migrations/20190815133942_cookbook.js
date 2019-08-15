@@ -6,6 +6,7 @@ exports.up = function(knex) {
         .string('recipe_name', 255)
         .notNullable()
         .unique();
+      tbl.string('instructions', 4000);
     })
     .createTable('ingredients', tbl => {
       tbl.increments();
@@ -31,6 +32,7 @@ exports.up = function(knex) {
         .inTable('ingredients')
         .onDelete('RESTRICT')
         .onUpdate('CASCADE'); // if the PK on primary table changes, what to do?
+      tbl.float('quantity').unsigned();
     });
 };
 
